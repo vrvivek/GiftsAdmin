@@ -8,4 +8,9 @@ router.get('/index',(req,res,next)=>{
     res.render('data',{pageTitle:'Dashboard'});
 });
 
+router.get('/test',(req,res,next)=>{
+    //res.sendFile(path.join(rootDir, 'views','add-pro.html'));
+    res.render('test',{pageTitle:'test'});
+});
+
 exports.router = router;
