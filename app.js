@@ -1,10 +1,22 @@
 const express=require('express');
-const adminRoutes = require('./routes/admin');
+
+const path= require('path');
+const adminData = require('./routes/admin');
 
 const body=require('body-parser');
 
 const app = express(); 
 
-app.use(body.urlencoded({extended:false}));
+app.set('view engine','ejs');
+app.set('views','views');
 
-app.use('/admin',adminRoutes);
+app.use(body.urlencoded({extended:false}));
+app.use(express.static(path.join(__dirname,'public')));
+
+app.use('/admin',adminData.router);
+
+app.use((req,res,next)=>{
+    res.status(404).render('404',{pageTitle:'Page Not Found'});
+});
+
+app.listen(3000);
