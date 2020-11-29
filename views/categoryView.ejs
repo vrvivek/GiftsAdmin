@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <%- include('layouts/head') %>
+</head>
+<body class="hold-transition sidebar-mini sidebar-collapse">
+<div class="wrapper">
+  <%- include('layouts/navbar') %>
+  <!-- Content Wrapper. Contains page content -->
+  <div class="content-wrapper">
+    <!-- Content Header (Page header) -->
+    <section class="content-header">
+      <div class="container-fluid">
+        <div class="row mb-2">
+          <div class="col-sm-6">
+            <h1><%= pageTitle %></h1>
+          </div>
+          <div class="col-sm-6">
+            <ol class="breadcrumb float-sm-right">
+              <li class="breadcrumb-item active"><%= pageTitle %></li>
+            </ol>
+          </div>
+        </div>
+      </div><!-- /.container-fluid -->
+    </section>
+
+    <!-- Main content -->
+    <section class="content">
+      <div class="container-fluid">
+        <div class="row">
+          <div class="col-12">
+            
+            <div class="card">
+              <div class="card-header">
+                <button type="button" style="float: right !important;" class="btn btn-success" data-toggle="modal" data-target="#modal-default">
+                    Add Category
+                </button>
+              </div>
+              <!-- /.card-header -->
+              <div class="card-body">
+                  <p class="lead"></p>
+                  <table id="example1" class="table table-bordered table-striped">
+                    <thead>
+                        <tr>
+                        <th>Category_Name</th>
+                        <th>Description</th>
+                        <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <% for(let cat of categories){  %>
+                            <tr>
+                                <td><%= cat.Category_Name %></td>
+                                <td><%= cat.Description %></td>
+                                <td>
+                                    <button type="button" class="btn btn-success" data-toggle="modal" data-target="#edit-category-<%= cat.Category_Id %>">
+                                        <i class="fa fa-edit"></i>
+                                    </button>
+                                    <div class="modal fade" id="edit-category-<%= cat.Category_Id %>">
+                                        <div class="modal-dialog">
+                                            <div  class="modal-content">
+                                                <form action="/admin/category/edit/<%= cat.Category_Id %>" method="post">
+                                                    <div class="modal-header">
+                                                        <h4 class="modal-title">Edit Category Form</h4>
+                                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                            <span aria-hidden="true">×</span>
+                                                        </button>
+                                                    </div>
+                                                    <div class="modal-body">
+                                                            <div class="form-group row">
+                                                                <label class="col-4">Category Name</label>
+                                                                <input type="text" name='categoryname' class="col-6 form-control" value="<%= cat.Category_Name %>" required=''/>
+                                                            </div>
+                                                            <div class="form-group row">
+                                                                <label class="col-4">Description</label>
+                                                                <textarea type="text" name='description' rows="3" class="col-6 form-control" required=''><%= cat.Description %></textarea>
+                                                            </div>
+                                                    </div>
+                                                    <div class="modal-footer justify-content-between">
+                                                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                                                        <input type="submit" class="btn btn-primary" value='Save'/>
+                                                    </div>
+                                                </form>
+                                            </div>
+                                        <!-- /.modal-content -->
+                                        </div>
+                                        <!-- /.modal-dialog -->
+                                    </div>
+                                </td>
+                            </tr>
+                        <% } %>
+                    </tbody>
+                    <tfoot>
+                    <tr>
+                      <th>Category_Name</th>
+                      <th>Description</th>
+                      <th>Actions</th>
+                    </tr>
+                    </tfoot>
+                  </table>
+              </div>
+              <!-- /.card-body -->
+            </div>
+            <!-- /.card -->
+          </div>
+          <!-- /.col -->
+        </div>
+        <!-- /.row -->
+      </div>
+      <!-- /.container-fluid -->
+    </section>
+    <!-- /.content -->
+    <div class="modal fade" id="modal-default">
+        <div class="modal-dialog">
+            <div  class="modal-content">
+                <form action="/admin/category/add" method="post">
+                    <div class="modal-header">
+                        <h4 class="modal-title">Category Form</h4>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">×</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                            <div class="form-group row">
+                                <label class="col-4">Category Name</label>
+                                <input type="text" name='categoryname' class="col-6 form-control" required=''/>
+                            </div>
+                            <div class="form-group row">
+                                <label class="col-4">Description</label>
+                                <textarea type="text" name='description' rows="3" class="col-6 form-control" required=''></textarea>
+                            </div>
+                    </div>
+                    <div class="modal-footer justify-content-between">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                        <input type="submit" class="btn btn-primary" value='Save'/>
+                    </div>
+                </form>
+            </div>
+        <!-- /.modal-content -->
+        </div>
+        <!-- /.modal-dialog -->
+    </div>
+  </div>
+  <%- include('layouts/footer') %>
+</div>
+<!-- ./wrapper -->
+
+<%- include('layouts/scripts') %>
+</body>
+</html>
