@@ -6,6 +6,7 @@ const conn = mysql.createConnection({
     user: "root", 
     password: "", 
     database: "giftsdeck",
+    multipleStatements: true
 });
 
 //connect to database

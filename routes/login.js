@@ -5,9 +5,9 @@ const conn = require('./../routes/database');
 const router = express.Router();
 
 router.post('/login',(req,res,next)=>{
-    let sql = "SELECT * FROM admins where Email_Id='"+req.body.email+"' and Password='"+req.body.password+"' ";
+    let sql = "SELECT * FROM admins where Email_Id=? and Password=? ";
     //console.log(sql);
-    let query = conn.query(sql, (err, results) => {
+    let query = conn.query(sql,[req.body.email,req.body.password], (err, results) => {
         if (err) throw err;
         if(results.length>0){
             console.log(results[0]);
