@@ -36,7 +36,7 @@
                                 <div class="card-header">
                                     <button type="button" style="float: right !important;" class="btn btn-success"
                                         data-toggle="modal" data-target="#modal-default">
-                                        Add Sub-Category
+                                        Add Product
                                     </button>
                                 </div>
                                 <!-- /.card-header -->
@@ -51,18 +51,18 @@
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            <% for(let sub of subcategories){  %>
+                                            <% for(let pro of products){  %>
                                             <tr>
-                                                <td><%= sub.Subcategory_Name %></td>
-                                                <td><%= sub.Category_Name %></td>
+                                                <td><%= pro.Subcategory_Name %></td>
+                                                <td><%= pro.Category_Name %></td>
                                                 <td>
-                                                    <button type="button" class="btn btn-success" data-toggle="modal" data-target="#edit-category-<%= sub.Subcategory_Id %>">
+                                                    <button type="button" class="btn btn-success" data-toggle="modal" data-target="#edit-category-<%= pro.Subcategory_Id %>">
                                                         <i class="fa fa-edit"></i>
                                                     </button>
-                                                    <div class="modal fade" id="edit-category-<%= sub.Subcategory_Id %>">
+                                                    <div class="modal fade" id="edit-category-<%= pro.Subcategory_Id %>">
                                                         <div class="modal-dialog">
                                                             <div class="modal-content">
-                                                                <form action="/admin/sub-category/edit/<%= sub.Subcategory_Id %>" method="post">
+                                                                <form action="/admin/sub-category/edit/<%= pro.Subcategory_Id %>" method="post">
                                                                     <div class="modal-header">
                                                                         <h4 class="modal-title">Edit Category Form</h4>
                                                                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
@@ -72,14 +72,14 @@
                                                                     <div class="modal-body">
                                                                         <div class="form-group row">
                                                                             <label class="col-4">Sub-Category Name</label>
-                                                                            <input type="text" name='subcategoryname'class="col-6 form-control" value="<%= sub.Subcategory_Name %>" required='' />
+                                                                            <input type="text" name='subcategoryname'class="col-6 form-control" value="<%= pro.Subcategory_Name %>" required='' />
                                                                         </div>
                                                                         <div class="form-group row">
                                                                             <label class="col-4">Category</label>
                                                                             <select name='category' required="">
                                                                                 <option value="">Select Category</option>
                                                                                 <% for(let cat of categorys){ 
-                                                                                        if(cat.Category_Id == sub.Category_Id){ %>
+                                                                                        if(cat.Category_Id == pro.Category_Id){ %>
                                                                                     <option value="<%= cat.Category_Id %>" selected><%= cat.Category_Name %></option>
                                                                                 <% }else{ %>
                                                                                     <option value="<%= cat.Category_Id %>"><%= cat.Category_Name %></option>

@@ -1,6 +1,6 @@
 const express=require('express');
 const rootDir = require('../util/path');
-const conn = require('./../routes/database');
+const conn = require('../models/database');
 const router = express.Router();
 
 router.get('/index',(req,res,next)=>{

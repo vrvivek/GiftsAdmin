@@ -1,7 +1,7 @@
 const path= require('path');
 const express=require('express');
 const rootDir = require('../util/path');
-const conn = require('./../routes/database');
+const conn = require('../models/database');
 const router = express.Router();
 
 router.post('/login',(req,res,next)=>{
