@@ -45,16 +45,28 @@
                                     <table id="example1" class="table table-bordered table-striped">
                                         <thead>
                                             <tr>
-                                                <th>Sub-Category Name</th>
+                                                <th>Product Name</th>
                                                 <th>Category Name</th>
+                                                <th>Sub-Category Name</th>
+                                                <th>Description</th>
+                                                <th>Price</th>
+                                                <th>Offer</th>
+                                                <th>Total_Price</th>
+                                                <th>Quantity</th>
                                                 <th>Actions</th>
                                             </tr>
                                         </thead>
                                         <tbody>
                                             <% for(let pro of products){  %>
                                             <tr>
-                                                <td><%= pro.Subcategory_Name %></td>
+                                                <td><%= pro.Product_Name %></td>
                                                 <td><%= pro.Category_Name %></td>
+                                                <td><%= pro.Subcategory_Name %></td>
+                                                <td><%= pro.Description %></td>
+                                                <td><%= pro.Price %></td>
+                                                <td><%= pro.Offer %></td>
+                                                <td><%= pro.Total_Price %></td>
+                                                <td><%= pro.Quantity %></td>
                                                 <td>
                                                     <button type="button" class="btn btn-success" data-toggle="modal" data-target="#edit-category-<%= pro.Subcategory_Id %>">
                                                         <i class="fa fa-edit"></i>
@@ -71,7 +83,7 @@
                                                                     </div>
                                                                     <div class="modal-body">
                                                                         <div class="form-group row">
-                                                                            <label class="col-4">Sub-Category Name</label>
+                                                                            <label class="col-3">Sub-Category Name</label>
                                                                             <input type="text" name='subcategoryname'class="col-6 form-control" value="<%= pro.Subcategory_Name %>" required='' />
                                                                         </div>
                                                                         <div class="form-group row">
@@ -103,8 +115,14 @@
                                         </tbody>
                                         <tfoot>
                                             <tr>
-                                                <th>Sub-Category Name</th>
+                                                <th>Product Name</th>
                                                 <th>Category Name</th>
+                                                <th>Sub-Category Name</th>
+                                                <th>Description</th>
+                                                <th>Price</th>
+                                                <th>Offer</th>
+                                                <th>Total_Price</th>
+                                                <th>Quantity</th>
                                                 <th>Actions</th>
                                             </tr>
                                         </tfoot>
@@ -124,26 +142,60 @@
             <div class="modal fade" id="modal-default">
                 <div class="modal-dialog">
                     <div class="modal-content">
-                        <form action="/admin/sub-category/add" method="post">
+                        <form action="/admin/products/add" method="post" enctype="multipart/form-data">
                             <div class="modal-header">
-                                <h4 class="modal-title">Sub-Category Form</h4>
+                                <h4 class="modal-title">Product Form</h4>
                                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                     <span aria-hidden="true">×</span>
                                 </button>
                             </div>
                             <div class="modal-body">
                                 <div class="form-group row">
-                                    <label class="col-4">Sub-Category Name</label>
-                                    <input type="text" name='subcategoryname' class="col-6 form-control" required='' />
+                                    <label class="col-3">Product Name</label>
+                                    <input type="text" name='productname' class="col-6 form-control" required='' />
                                 </div>
                                 <div class="form-group row">
-                                    <label class="col-4">Category</label>
-                                    <select name='category' required="">
+                                    <label class="col-3">Category</label>
+                                    <select name='category' required="" onchange="getsubcat(this.value)">
                                         <option value="">Select Category</option>
                                         <% for(let cat of categorys){  %>
                                             <option value="<%= cat.Category_Id %>"><%= cat.Category_Name %></option>
                                         <% } %>
                                     </select>
+                                </div>
+                                <div class="form-group row">
+                                    <label class="col-3">Sub-Category</label>
+                                    <select name="subcategory" id="subcategory" required="">
+                                        <option value="">Select Sub-Category</option>
+                                    </select>
+                                </div>
+                                <div class="form-group row">
+                                    <label class="col-3">Description</label>
+                                    <input type="text" name='description' class="col-6 form-control" required='' />
+                                </div>
+                                <div class="form-group row">
+                                    <label class="col-3">Price</label>
+                                    <input type="number" name='price' class="col-6 form-control" required='' />
+                                </div>
+                                <div class="form-group row">
+                                    <label class="col-3">Offer</label>
+                                    <input type="number" name='offer' class="col-6 form-control" required='' />
+                                </div>
+                                <div class="form-group row">
+                                    <label class="col-3">Image1</label>
+                                    <input type="file" name='image1' class="col-6 form-control" required='' />
+                                </div>
+                                <div class="form-group row">
+                                    <label class="col-3">Image2</label>
+                                    <input type="file" name='image2' class="col-6 form-control" required='' />
+                                </div>
+                                <div class="form-group row">
+                                    <label class="col-3">Image3</label>
+                                    <input type="file" name='image3' class="col-6 form-control" required='' />
+                                </div>
+                                <div class="form-group row">
+                                    <label class="col-3">Quantity</label>
+                                    <input type="text" name='quantity' class="col-6 form-control" required='' />
                                 </div>
                             </div>
                             <div class="modal-footer justify-content-between">
@@ -160,8 +212,23 @@
         <%- include('layouts/footer') %>
     </div>
     <!-- ./wrapper -->
-
     <%- include('layouts/scripts') %>
 </body>
-
+<script>
+    function getsubcat(id)
+    {
+        $.ajax({
+            url:'/admin/products/getsubcat/'+id,
+            type:'get',
+            success:function(data){
+                var subcat=data.subcat;
+                $("#subcategory").html('<option value="">Select Sub-Category</option>');
+                for(i=0;i<subcat.length;i++)
+                {
+                    $("#subcategory").append(`<option value='${subcat[i].Subcategory_Id}'>${subcat[i].Subcategory_Name}</option>`);
+                }
+            }
+        });
+    }
+</script>
 </html>
