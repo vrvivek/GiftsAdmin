@@ -49,6 +49,7 @@
                                                 <th>Category Name</th>
                                                 <th>Sub-Category Name</th>
                                                 <th>Description</th>
+                                                <th>Images</th>
                                                 <th>Price</th>
                                                 <th>Offer</th>
                                                 <th>Total_Price</th>
@@ -63,6 +64,11 @@
                                                 <td><%= pro.Category_Name %></td>
                                                 <td><%= pro.Subcategory_Name %></td>
                                                 <td><%= pro.Description %></td>
+                                                <td>
+                                                    <img src="/productImage/<%= pro.Image1 %>" alt="image not found" height="60" width="60">
+                                                    <img src="/productImage/<%= pro.Image2 %>" alt="image not found" height="60" width="60">
+                                                    <img src="/productImage/<%= pro.Image3 %>" alt="image not found" height="60" width="60">
+                                                </td>
                                                 <td><%= pro.Price %></td>
                                                 <td><%= pro.Offer %></td>
                                                 <td><%= pro.Total_Price %></td>
@@ -119,6 +125,7 @@
                                                 <th>Category Name</th>
                                                 <th>Sub-Category Name</th>
                                                 <th>Description</th>
+                                                <th>images</th>
                                                 <th>Price</th>
                                                 <th>Offer</th>
                                                 <th>Total_Price</th>
