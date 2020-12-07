@@ -36,7 +36,7 @@
                                 <div class="card-header">
                                     <button type="button" style="float: right !important;" class="btn btn-success"
                                         data-toggle="modal" data-target="#modal-default">
-                                        Add Sub-Category
+                                        Add Cities
                                     </button>
                                 </div>
                                 <!-- /.card-header -->
@@ -45,44 +45,44 @@
                                     <table id="example1" class="table table-bordered table-striped">
                                         <thead>
                                             <tr>
-                                                <th>Sub-Category Name</th>
-                                                <th>Category Name</th>
+                                                <th>City Name</th>
+                                                <th>State Name</th>
                                                 <th>Actions</th>
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            <% for(let sub of subcategories){  %>
+                                            <% for(let c of cities){  %>
                                             <tr>
-                                                <td><%= sub.Subcategory_Name %></td>
-                                                <td><%= sub.Category_Name %></td>
+                                                <td><%= c.City_Name %></td>
+                                                <td><%= c.State_Name %></td>
                                                 <td>
-                                                    <button type="button" class="btn btn-success" data-toggle="modal" data-target="#edit-category-<%= sub.Subcategory_Id %>">
+                                                    <button type="button" class="btn btn-success" data-toggle="modal" data-target="#edit-city-<%= c.City_Id %>">
                                                         <i class="fa fa-edit"></i>
                                                     </button>
-                                                    <div class="modal fade" id="edit-category-<%= sub.Subcategory_Id %>">
+                                                    <div class="modal fade" id="edit-city-<%= c.City_Id %>">
                                                         <div class="modal-dialog">
                                                             <div class="modal-content">
-                                                                <form action="/admin/sub-category/edit/<%= sub.Subcategory_Id %>" method="post">
+                                                                <form action="/admin/City/edit/<%= c.City_Id %>" method="post">
                                                                     <div class="modal-header">
-                                                                        <h4 class="modal-title">Edit Sub-Category Form</h4>
+                                                                        <h4 class="modal-title">Edit City Form</h4>
                                                                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                                                             <span aria-hidden="true">×</span>
                                                                         </button>
                                                                     </div>
                                                                     <div class="modal-body">
                                                                         <div class="form-group row">
-                                                                            <label class="col-4">Sub-Category Name</label>
-                                                                            <input type="text" name='subcategoryname'class="col-6 form-control" value="<%= sub.Subcategory_Name %>" required='' />
+                                                                            <label class="col-4">City Name</label>
+                                                                            <input type="text" name='cityname'class="col-6 form-control" value="<%= c.City_Name %>" required='' />
                                                                         </div>
                                                                         <div class="form-group row">
-                                                                            <label class="col-4">Category</label>
-                                                                            <select name='category' required="">
-                                                                                <option value="">Select Category</option>
-                                                                                <% for(let cat of categorys){ 
-                                                                                        if(cat.Category_Id == sub.Category_Id){ %>
-                                                                                    <option value="<%= cat.Category_Id %>" selected><%= cat.Category_Name %></option>
+                                                                            <label class="col-4">State</label>
+                                                                            <select name='state' required="">
+                                                                                <option value="">Select State</option>
+                                                                                <% for(let s of states){ 
+                                                                                        if(s.State_Id == c.State_Id){ %>
+                                                                                    <option value="<%= s.State_Id %>" selected><%= s.State_Name %></option>
                                                                                 <% }else{ %>
-                                                                                    <option value="<%= cat.Category_Id %>"><%= cat.Category_Name %></option>
+                                                                                    <option value="<%= s.State_Id %>"><%= s.State_Name %></option>
                                                                                 <% } } %>
                                                                             </select>
                                                                         </div>
@@ -103,8 +103,8 @@
                                         </tbody>
                                         <tfoot>
                                             <tr>
-                                                <th>Sub-Category Name</th>
-                                                <th>Category Name</th>
+                                                <th>City Name</th>
+                                                <th>State Name</th>
                                                 <th>Actions</th>
                                             </tr>
                                         </tfoot>
@@ -124,24 +124,24 @@
             <div class="modal fade" id="modal-default">
                 <div class="modal-dialog">
                     <div class="modal-content">
-                        <form action="/admin/sub-category/add" method="post">
+                        <form action="/admin/City/add" method="post">
                             <div class="modal-header">
-                                <h4 class="modal-title">Sub-Category Form</h4>
+                                <h4 class="modal-title">City Form</h4>
                                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                     <span aria-hidden="true">×</span>
                                 </button>
                             </div>
                             <div class="modal-body">
                                 <div class="form-group row">
-                                    <label class="col-4">Sub-Category Name</label>
-                                    <input type="text" name='subcategoryname' class="col-6 form-control" required='' />
+                                    <label class="col-4">City Name</label>
+                                    <input type="text" name='cityname' class="col-6 form-control" required='' />
                                 </div>
                                 <div class="form-group row">
-                                    <label class="col-4">Category</label>
-                                    <select name='category' required="">
-                                        <option value="">Select Category</option>
-                                        <% for(let cat of categorys){  %>
-                                            <option value="<%= cat.Category_Id %>"><%= cat.Category_Name %></option>
+                                    <label class="col-4">State</label>
+                                    <select name='state' required="">
+                                        <option value="">Select State</option>
+                                        <% for(let s of states){  %>
+                                            <option value="<%= s.State_Id %>"><%= s.State_Name %></option>
                                         <% } %>
                                     </select>
                                 </div>

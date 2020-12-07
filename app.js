@@ -6,6 +6,7 @@ const category = require('./routes/category');
 const subcategory = require('./routes/sub-category');
 const products=require('./routes/product');
 const state= require('./routes/state');
+const city= require('./routes/city');
 const login = require('./routes/login');
 const body=require('body-parser');
 const helmet = require("helmet");
@@ -28,7 +29,8 @@ app.use('/admin',admin.router);
 app.use('/admin',category.router);
 app.use('/admin',subcategory.router);
 app.use('/admin',products.router);
-app.use('/admin',state.router)
+app.use('/admin',state.router);
+app.use('/admin',city.router);
 
 app.use('/',(req,res,next)=>{
     res.statusCode= 404;
