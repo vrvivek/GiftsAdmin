@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Dec 17, 2020 at 07:40 PM
+-- Generation Time: Dec 29, 2020 at 07:30 AM
 -- Server version: 10.4.14-MariaDB
 -- PHP Version: 7.4.11
 
@@ -54,9 +54,17 @@ CREATE TABLE `carts` (
   `Quantity` int(11) NOT NULL,
   `Price` int(11) NOT NULL,
   `Total` int(11) NOT NULL,
-  `created_at` timestamp NULL DEFAULT NULL,
-  `updated_at` timestamp NULL DEFAULT NULL
+  `created_at` timestamp NULL DEFAULT current_timestamp(),
+  `updated_at` timestamp NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `carts`
+--
+
+INSERT INTO `carts` (`Cart_Id`, `User_Id`, `Product_Id`, `Quantity`, `Price`, `Total`, `created_at`, `updated_at`) VALUES
+(1, 1, 2, 3, 190, 570, '2020-12-29 05:47:17', '2020-12-29 05:47:17'),
+(2, 1, 1, 3, 15, 45, '2020-12-29 06:01:39', '2020-12-29 06:01:39');
 
 -- --------------------------------------------------------
 
@@ -241,7 +249,8 @@ CREATE TABLE `products` (
 --
 
 INSERT INTO `products` (`Product_Id`, `Product_Name`, `Category_Id`, `Sub-Category_Id`, `Description`, `Price`, `Offer`, `Total_Price`, `Image1`, `Image2`, `Image3`, `Quantity`) VALUES
-(1, 'test', 2, 1, 'test', 20, 5, 15, 'nature-wallpaper-hd-1 - 1607610378863.jpg', 'unnamed - 1607610378930.jpg', 'Wild-Waters-Lodge-678x381 - 1607610378940.jpg', 3);
+(1, 'test', 2, 1, 'test', 20, 5, 15, 'nature-wallpaper-hd-1 - 1607610378863.jpg', 'unnamed - 1607610378930.jpg', 'Wild-Waters-Lodge-678x381 - 1607610378940.jpg', 4),
+(2, 'test1', 2, 1, 'test', 200, 10, 190, '71WP-QZcAwL - 1608544674789.jpg', 'Amazing-Macro-Nature-HD-Wallpaper - 1608544674797.jpg', 'maxresdefault - 1608544674812.jpg', 3);
 
 -- --------------------------------------------------------
 
@@ -453,7 +462,7 @@ ALTER TABLE `admins`
 -- AUTO_INCREMENT for table `carts`
 --
 ALTER TABLE `carts`
-  MODIFY `Cart_Id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `Cart_Id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `categorys`
@@ -501,7 +510,7 @@ ALTER TABLE `photos`
 -- AUTO_INCREMENT for table `products`
 --
 ALTER TABLE `products`
-  MODIFY `Product_Id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `Product_Id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `secret_ques`
