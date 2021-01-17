@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <%- include('layouts/head') %>
+</head>
+<style>
+    #ProductTable thead tr th:nth-child(1),
+    #ProductTable tbody tr td:nth-child(1),
+    #ProductTable tfoot tr th:nth-child(1) {
+        max-width: 180px !important;
+    }
+
+    #ProductTable thead tr th:nth-child(4),
+    #ProductTable tbody tr td:nth-child(4),
+    #ProductTable tfoot tr th:nth-child(4) {
+        max-width: 250px !important;
+    }
+
+    #ProductTable thead tr th:nth-child(5),
+    #ProductTable tbody tr td:nth-child(5),
+    #ProductTable tfoot tr th:nth-child(5) {
+        width: 190px !important;
+        max-width: 300px !important;
+    }
+</style>
+
+<body class="hold-transition sidebar-mini sidebar-collapse">
+    <div class="wrapper">
+        <%- include('layouts/navbar') %>
+            <!-- Content Wrapper. Contains page content -->
+            <div class="content-wrapper">
+                <!-- Content Header (Page header) -->
+                <section class="content-header">
+                    <div class="container-fluid">
+                        <div class="row mb-2">
+                            <div class="col-sm-6">
+                                <h1>
+                                    <%= pageTitle %>
+                                </h1>
+                            </div>
+                            <div class="col-sm-6">
+                                <ol class="breadcrumb float-sm-right">
+                                    <li class="breadcrumb-item active">
+                                        <%= pageTitle %>
+                                    </li>
+                                </ol>
+                            </div>
+                        </div>
+                    </div><!-- /.container-fluid -->
+                </section>
+
+                <!-- Main content -->
+                <section class="content">
+                    <div class="container-fluid">
+                        <div class="row">
+                            <div class="col-12">
+
+                                <div class="card">
+                                    <div class="card-header">
+                                        <button type="button" style="float: right !important;" class="btn btn-success"
+                                            data-toggle="modal" data-target="#modal-default">
+                                            Add Product
+                                        </button>
+                                    </div>
+                                    <!-- /.card-header -->
+                                    <div class="card-body">
+                                        <p class="lead"></p>
+                                        <table id="ProductTable" class="table table-bordered table-striped">
+                                            <thead>
+                                                <tr>
+                                                    <th>Product Name</th>
+                                                    <th>Category Name</th>
+                                                    <th>Sub-Category Name</th>
+                                                    <th>Description</th>
+                                                    <th>Images</th>
+                                                    <th>Price</th>
+                                                    <th>Offer</th>
+                                                    <th>Total_Price</th>
+                                                    <th>Quantity</th>
+                                                    <th>Actions</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <% for(let pro of products){ %>
+                                                    <tr>
+                                                        <td>
+                                                            <%= pro.Product_Name %>
+                                                        </td>
+                                                        <td>
+                                                            <%= pro.Category_Name %>
+                                                        </td>
+                                                        <td>
+                                                            <%= pro.Subcategory_Name %>
+                                                        </td>
+                                                        <td>
+                                                            <%= pro.Description %>
+                                                        </td>
+                                                        <td>
+                                                            <img src="/productImage/<%= pro.Image1 %>"
+                                                                alt="image not found" height="60" width="60">
+                                                            <img src="/productImage/<%= pro.Image2 %>"
+                                                                alt="image not found" height="60" width="60">
+                                                            <img src="/productImage/<%= pro.Image3 %>"
+                                                                alt="image not found" height="60" width="60">
+                                                        </td>
+                                                        <td>
+                                                            <%= pro.Price %>
+                                                        </td>
+                                                        <td>
+                                                            <%= pro.Offer %>
+                                                        </td>
+                                                        <td>
+                                                            <%= pro.Total_Price %>
+                                                        </td>
+                                                        <td>
+                                                            <%= pro.Quantity %>
+                                                        </td>
+                                                        <td>
+                                                            <button type="button" class="btn btn-success"
+                                                                data-toggle="modal"
+                                                                data-target="#edit-category-<%= pro.Subcategory_Id %>">
+                                                                <i class="fa fa-edit"></i>
+                                                            </button>
+                                                            <div class="modal fade"
+                                                                id="edit-category-<%= pro.Subcategory_Id %>">
+                                                                <div class="modal-dialog">
+                                                                    <div class="modal-content">
+                                                                        <form
+                                                                            action="/admin/sub-category/edit/<%= pro.Subcategory_Id %>"
+                                                                            method="post">
+                                                                            <div class="modal-header">
+                                                                                <h4 class="modal-title">Edit Category
+                                                                                    Form</h4>
+                                                                                <button type="button" class="close"
+                                                                                    data-dismiss="modal"
+                                                                                    aria-label="Close">
+                                                                                    <span aria-hidden="true">×</span>
+                                                                                </button>
+                                                                            </div>
+                                                                            <div class="modal-body">
+                                                                                <div class="form-group row">
+                                                                                    <label class="col-3">Sub-Category
+                                                                                        Name</label>
+                                                                                    <input type="text"
+                                                                                        name='subcategoryname'
+                                                                                        class="col-6 form-control"
+                                                                                        value="<%= pro.Subcategory_Name %>"
+                                                                                        required='' />
+                                                                                </div>
+                                                                                <div class="form-group row">
+                                                                                    <label
+                                                                                        class="col-4">Category</label>
+                                                                                    <select name='category' required="">
+                                                                                        <option value="">Select Category
+                                                                                        </option>
+                                                                                        <% for(let cat of categorys){
+                                                                                            if(cat.Category_Id==pro.Category_Id){
+                                                                                            %>
+                                                                                            <option
+                                                                                                value="<%= cat.Category_Id %>"
+                                                                                                selected>
+                                                                                                <%= cat.Category_Name %>
+                                                                                            </option>
+                                                                                            <% }else{ %>
+                                                                                                <option
+                                                                                                    value="<%= cat.Category_Id %>">
+                                                                                                    <%= cat.Category_Name
+                                                                                                        %>
+                                                                                                </option>
+                                                                                                <% } } %>
+                                                                                    </select>
+                                                                                </div>
+                                                                            </div>
+                                                                            <div
+                                                                                class="modal-footer justify-content-between">
+                                                                                <button type="button"
+                                                                                    class="btn btn-default"
+                                                                                    data-dismiss="modal">Close</button>
+                                                                                <input type="submit"
+                                                                                    class="btn btn-primary"
+                                                                                    value='Edit' />
+                                                                            </div>
+                                                                        </form>
+                                                                    </div>
+                                                                    <!-- /.modal-content -->
+                                                                </div>
+                                                                <!-- /.modal-dialog -->
+                                                            </div>
+                                                        </td>
+                                                    </tr>
+                                                    <% } %>
+                                            </tbody>
+                                            <tfoot>
+                                                <tr>
+                                                    <th>Product Name</th>
+                                                    <th>Category Name</th>
+                                                    <th>Sub-Category Name</th>
+                                                    <th>Description</th>
+                                                    <th>images</th>
+                                                    <th>Price</th>
+                                                    <th>Offer</th>
+                                                    <th>Total_Price</th>
+                                                    <th>Quantity</th>
+                                                    <th>Actions</th>
+                                                </tr>
+                                            </tfoot>
+                                        </table>
+                                    </div>
+                                    <!-- /.card-body -->
+                                </div>
+                                <!-- /.card -->
+                            </div>
+                            <!-- /.col -->
+                        </div>
+                        <!-- /.row -->
+                    </div>
+                    <!-- /.container-fluid -->
+                </section>
+                <!-- /.content -->
+                <div class="modal fade" id="modal-default">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <form action="/admin/products/add" method="post" enctype="multipart/form-data">
+                                <div class="modal-header">
+                                    <h4 class="modal-title">Product Form</h4>
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">×</span>
+                                    </button>
+                                </div>
+                                <div class="modal-body">
+                                    <div class="form-group row">
+                                        <label class="col-3">Product Name</label>
+                                        <input type="text" name='productname' class="col-6 form-control" required='' />
+                                    </div>
+                                    <div class="form-group row">
+                                        <label class="col-3">Category</label>
+                                        <select name='category' required="" onchange="getsubcat(this.value)">
+                                            <option value="">Select Category</option>
+                                            <% for(let cat of categorys){ %>
+                                                <option value="<%= cat.Category_Id %>">
+                                                    <%= cat.Category_Name %>
+                                                </option>
+                                                <% } %>
+                                        </select>
+                                    </div>
+                                    <div class="form-group row">
+                                        <label class="col-3">Sub-Category</label>
+                                        <select name="subcategory" id="subcategory" required="">
+                                            <option value="">Select Sub-Category</option>
+                                        </select>
+                                    </div>
+                                    <div class="form-group row">
+                                        <label class="col-3">Description</label>
+                                        <input type="text" name='description' class="col-6 form-control" required='' />
+                                    </div>
+                                    <div class="form-group row">
+                                        <label class="col-3">Price</label>
+                                        <input type="number" name='price' class="col-6 form-control" required='' />
+                                    </div>
+                                    <div class="form-group row">
+                                        <label class="col-3">Offer</label>
+                                        <input type="number" name='offer' class="col-6 form-control" required='' />
+                                    </div>
+                                    <div class="form-group row">
+                                        <label class="col-3">Image1</label>
+                                        <input type="file" name='image1' class="col-6 form-control" required='' />
+                                    </div>
+                                    <div class="form-group row">
+                                        <label class="col-3">Image2</label>
+                                        <input type="file" name='image2' class="col-6 form-control" required='' />
+                                    </div>
+                                    <div class="form-group row">
+                                        <label class="col-3">Image3</label>
+                                        <input type="file" name='image3' class="col-6 form-control" required='' />
+                                    </div>
+                                    <div class="form-group row">
+                                        <label class="col-3">Quantity</label>
+                                        <input type="text" name='quantity' class="col-6 form-control" required='' />
+                                    </div>
+                                </div>
+                                <div class="modal-footer justify-content-between">
+                                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                                    <input type="submit" class="btn btn-primary" value='Save' />
+                                </div>
+                            </form>
+                        </div>
+                        <!-- /.modal-content -->
+                    </div>
+                    <!-- /.modal-dialog -->
+                </div>
+            </div>
+            <%- include('layouts/footer') %>
+    </div>
+    <!-- ./wrapper -->
+    <%- include('layouts/scripts') %>
+</body>
+<script>
+    $(function () {
+        $("#ProductTable").DataTable({
+            "responsive": true,
+            "autoWidth": false,
+        });
+    });
+</script>
+<script>
+    function getsubcat(id) {
+        $.ajax({
+            url: '/admin/products/getsubcat/' + id,
+            type: 'get',
+            success: function (data) {
+                var subcat = data.subcat;
+                $("#subcategory").html('<option value="">Select Sub-Category</option>');
+                for (i = 0; i < subcat.length; i++) {
+                    $("#subcategory").append(`<option value='${subcat[i].Subcategory_Id}'>${subcat[i].Subcategory_Name}</option>`);
+                }
+            }
+        });
+    }
+</script>
+
+</html>
