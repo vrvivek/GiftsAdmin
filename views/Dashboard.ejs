@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <%- include('layouts/head') %>
+</head>
+
+<body class="hold-transition sidebar-mini sidebar-collapse">
+  <div class="wrapper">
+    <%- include('layouts/navbar') %>
+      <!-- Content Wrapper. Contains page content -->
+      <div class="content-wrapper">
+        <!-- Content Header (Page header) -->
+        <section class="content-header">
+          <div class="container-fluid">
+            <div class="row mb-2">
+              <div class="col-sm-6">
+                <h1>
+                  <%= pageTitle %>
+                </h1>
+              </div>
+              <div class="col-sm-6">
+                <ol class="breadcrumb float-sm-right">
+                  <li class="breadcrumb-item active">
+                    <%= pageTitle %>
+                  </li>
+                </ol>
+              </div>
+            </div>
+          </div><!-- /.container-fluid -->
+        </section>
+
+        <!-- Main content -->
+        <section class="content">
+          <div class="container-fluid">
+            <div class="row">
+              <div class="col-lg-3 col-6">
+                <!-- small box -->
+                <div class="small-box bg-info">
+                  <div class="inner">
+                    <h3>
+                      <%= categorys.countcategorys %>
+                    </h3>
+
+                    <p>Category</p>
+                  </div>
+                  <div class="icon">
+                    <i class="fas fa-list"></i>
+                  </div>
+                  <a href="/admin/category/index" class="small-box-footer">More info <i
+                      class="fas fa-arrow-circle-right"></i></a>
+                </div>
+              </div>
+              <!-- ./col -->
+              <div class="col-lg-3 col-6">
+                <!-- small box -->
+                <div class="small-box bg-success">
+                  <div class="inner">
+                    <h3>
+                      <%= subcategories.countsubcategorys %>
+                    </h3>
+
+                    <p>Sub-Category</p>
+                  </div>
+                  <div class="icon">
+                    <i class="far fa-list-alt"></i>
+                  </div>
+                  <a href="/admin/sub-category/index" class="small-box-footer">More info <i
+                      class="fas fa-arrow-circle-right"></i></a>
+                </div>
+              </div>
+              <!-- ./col -->
+              <div class="col-lg-3 col-6">
+                <!-- small box -->
+                <div class="small-box bg-warning">
+                  <div class="inner">
+                    <h3><%= users.countusers %></h3>
+
+                    <p>User Registrations</p>
+                  </div>
+                  <div class="icon">
+                    <i class="ion ion-person-add"></i>
+                  </div>
+                  <a class="small-box-footer">&nbsp;</a>
+                </div>
+              </div>
+              <!-- ./col -->
+              <div class="col-lg-3 col-6">
+                <!-- small box -->
+                <div class="small-box bg-danger">
+                  <div class="inner">
+                    <h3><%= products.countproducs %></h3>
+
+                    <p>Products</p>
+                  </div>
+                  <div class="icon">
+                    <i class="fas fa-gift"></i>
+                  </div>
+                  <a href="/admin/products/index" class="small-box-footer">More info <i
+                      class="fas fa-arrow-circle-right"></i></a>
+                </div>
+              </div>
+              <!-- ./col -->
+              <div class="col-lg-3 col-6">
+                <!-- small box -->
+                <div class="small-box bg-danger">
+                  <div class="inner">
+                    <h3><%= states.countstates %></h3>
+
+                    <p>States</p>
+                  </div>
+                  <div class="icon">
+                    <i class="fas fa-archway"></i>
+                  </div>
+                  <a href="/admin/state/index" class="small-box-footer">More info <i
+                      class="fas fa-arrow-circle-right"></i></a>
+                </div>
+              </div>
+              <!-- ./col -->
+              <div class="col-lg-3 col-6">
+                <!-- small box -->
+                <div class="small-box bg-warning">
+                  <div class="inner">
+                    <h3><%= citys.countcitys %></h3>
+
+                    <p>Citys</p>
+                  </div>
+                  <div class="icon">
+                    <i class="fas fa-city"></i>
+                  </div>
+                  <a href="/admin/city/index" class="small-box-footer">More info <i
+                      class="fas fa-arrow-circle-right"></i></a>
+                </div>
+              </div>
+              <!-- ./col -->
+              <div class="col-lg-3 col-6">
+                <!-- small box -->
+                <div class="small-box bg-success">
+                  <div class="inner">
+                    <h3><%= secrets.countsecretques %></h3>
+
+                    <p>Secret Questions</p>
+                  </div>
+                  <div class="icon">
+                    <i class="fas fa-key "></i>
+                  </div>
+                  <a href="/admin/secretque/index" class="small-box-footer">More info <i
+                      class="fas fa-arrow-circle-right"></i></a>
+                </div>
+              </div>
+              <!-- ./col -->
+            </div>
+            <!-- /.row -->
+          </div>
+          <!-- /.container-fluid -->
+        </section>
+        <!-- /.content -->
+      </div>
+      <%- include('layouts/footer') %>
+  </div>
+  <!-- ./wrapper -->
+
+  <%- include('layouts/scripts') %>
+</body>
+
+</html>
