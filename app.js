@@ -8,6 +8,7 @@ const products=require('./routes/product');
 const state= require('./routes/state');
 const city= require('./routes/city');
 const secret= require('./routes/secret-que');
+const porders= require('./routes/porders');
 const login = require('./routes/login');
 const body=require('body-parser');
 const helmet = require("helmet");
@@ -33,10 +34,11 @@ app.use('/admin',products.router);
 app.use('/admin',state.router);
 app.use('/admin',city.router);
 app.use('/admin',secret.router);
+app.use('/admin',porders.router);
 
 app.use('/',(req,res,next)=>{
     res.statusCode= 404;
     res.render('404',{pageTitle:'Page Not Found'});
 });
 
-app.listen(3000);
+app.listen(80);
