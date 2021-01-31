@@ -39,4 +39,4 @@ app.use('/',(req,res,next)=>{
     res.render('404',{pageTitle:'Page Not Found'});
 });
 
-app.listen();
+app.listen(80);
