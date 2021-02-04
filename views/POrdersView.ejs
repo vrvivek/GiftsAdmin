@@ -38,10 +38,6 @@
 
                                 <div class="card">
                                     <div class="card-header">
-                                        <button type="button" style="float: right !important;" class="btn btn-success"
-                                            data-toggle="modal" data-target="#modal-default">
-                                            Add Secret Questions
-                                        </button>
                                     </div>
                                     <!-- /.card-header -->
                                     <div class="card-body">
@@ -49,8 +45,14 @@
                                         <table id="example1" class="table table-bordered table-striped">
                                             <thead>
                                                 <tr>
+                                                    <th>Order_Date</th>
+                                                    <th>Status</th>
+                                                    <th>Transaction_Code</th>
                                                     <th>Product_Name</th>
+                                                    <th>Image</th>
                                                     <th>User_Name</th>
+                                                    <th>Shipping Address</th>
+                                                    <th>Total Price</th>
                                                     <th>Actions</th>
                                                 </tr>
                                             </thead>
@@ -58,27 +60,42 @@
                                                 <% for(let o of orders){ %>
                                                     <tr>
                                                         <td>
+                                                            <% date= new Date(o.Order_Date) %><%= date.toLocaleDateString().split('/').join('-')+' '+date.toLocaleTimeString() %>
+                                                        </td>
+                                                        <td>
+                                                            <%= o.Status %>
+                                                        </td>
+                                                        <td>
+                                                            <%= o.Transaction_Code %>
+                                                        </td>
+                                                        <td>
                                                             <%= o.Product_Name %>
+                                                        </td>
+                                                        <td>
+                                                            <img src="/productImage/<%= o.Image1 %>" height="50px" width="50px"/>
                                                         </td>
                                                         <td>
                                                             <%= o.User_Name %>
                                                         </td>
                                                         <td>
+                                                            <%= o.Shipping_Address %>
+                                                        </td>
+                                                        <td>
+                                                            ₹<%= o.Total %>
+                                                        </td>
+                                                        <td>
                                                             <button type="button" class="btn btn-success"
                                                                 data-toggle="modal"
-                                                                data-target="#edit-secretque-<%= o.Secret_Id %>">
+                                                                data-target="#edit-porders-<%= o.Order_Id %>">
                                                                 <i class="fa fa-edit"></i>
                                                             </button>
                                                             <div class="modal fade"
-                                                                id="edit-secretque-<%= o.Secret_Id %>">
+                                                                id="edit-porders-<%= o.Order_Id %>">
                                                                 <div class="modal-dialog">
                                                                     <div class="modal-content">
-                                                                        <form
-                                                                            action="/admin/secretque/edit/<%= o.Secret_Id %>"
-                                                                            method="post">
+                                                                        <form action="/admin/porders/edit/<%= o.Order_Id %>" method="post">
                                                                             <div class="modal-header">
-                                                                                <h4 class="modal-title">Edit Secret Que
-                                                                                    Form</h4>
+                                                                                <h4 class="modal-title">Edit Order Status</h4>
                                                                                 <button type="button" class="close"
                                                                                     data-dismiss="modal"
                                                                                     aria-label="Close">
@@ -87,13 +104,12 @@
                                                                             </div>
                                                                             <div class="modal-body">
                                                                                 <div class="form-group row">
-                                                                                    <label class="col-4">Secret
-                                                                                        Question</label>
-                                                                                    <input type="text"
-                                                                                        name='editsecretque'
-                                                                                        class="col-6 form-control"
-                                                                                        value="<%= o.Secret_Que %>"
-                                                                                        required='' />
+                                                                                    <label class="col-4">Status</label>
+                                                                                    <select type="text" name='Status' class="col-6 form-control" required='' >
+                                                                                        <option value="Payment Pending" <% if(o.Status == "Payment Pending"){ %>selected<% } %> >Payment Pending</option>
+                                                                                        <option value="Payment Success" <% if(o.Status == "Payment Success"){ %>selected<% } %> >Payment Success</option>
+                                                                                        <option value="Order delivered" <% if(o.Status == "Order delivered"){ %>selected<% } %> >Order delivered</option>
+                                                                                    </select>
                                                                                 </div>
                                                                             </div>
                                                                             <div
@@ -117,8 +133,14 @@
                                             </tbody>
                                             <tfoot>
                                                 <tr>
+                                                    <th>Order_Date</th>
+                                                    <th>Status</th>
+                                                    <th>Transaction_Code</th>
                                                     <th>Product_Name</th>
+                                                    <th>Image</th>
                                                     <th>User_Name</th>
+                                                    <th>Shipping Address</th>
+                                                    <th>Total Price</th>
                                                     <th>Actions</th>
                                                 </tr>
                                             </tfoot>
@@ -135,32 +157,6 @@
                     <!-- /.container-fluid -->
                 </section>
                 <!-- /.content -->
-                <div class="modal fade" id="modal-default">
-                    <div class="modal-dialog">
-                        <div class="modal-content">
-                            <form action="/admin/secretque/add" method="post">
-                                <div class="modal-header">
-                                    <h4 class="modal-title">Secret Question Form</h4>
-                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                        <span aria-hidden="true">×</span>
-                                    </button>
-                                </div>
-                                <div class="modal-body">
-                                    <div class="form-group row">
-                                        <label class="col-4">Secret Que</label>
-                                        <input type="text" name='secretque' class="col-6 form-control" required='' />
-                                    </div>
-                                </div>
-                                <div class="modal-footer justify-content-between">
-                                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                                    <input type="submit" class="btn btn-primary" value='Save' />
-                                </div>
-                            </form>
-                        </div>
-                        <!-- /.modal-content -->
-                    </div>
-                    <!-- /.modal-dialog -->
-                </div>
             </div>
             <%- include('layouts/footer') %>
     </div>

@@ -119,67 +119,62 @@
                                                         <td>
                                                             <button type="button" class="btn btn-success"
                                                                 data-toggle="modal"
-                                                                data-target="#edit-category-<%= pro.Subcategory_Id %>">
+                                                                data-target="#edit-category-<%= pro.Product_Id %>">
                                                                 <i class="fa fa-edit"></i>
                                                             </button>
                                                             <div class="modal fade"
-                                                                id="edit-category-<%= pro.Subcategory_Id %>">
+                                                                id="edit-category-<%= pro.Product_Id %>">
                                                                 <div class="modal-dialog">
                                                                     <div class="modal-content">
-                                                                        <form
-                                                                            action="/admin/sub-category/edit/<%= pro.Subcategory_Id %>"
-                                                                            method="post">
+                                                                        <form action="/admin/products/edit/<%= pro.Product_Id %>" method="post" enctype="multipart/form-data">
                                                                             <div class="modal-header">
-                                                                                <h4 class="modal-title">Edit Category
-                                                                                    Form</h4>
-                                                                                <button type="button" class="close"
-                                                                                    data-dismiss="modal"
-                                                                                    aria-label="Close">
+                                                                                <h4 class="modal-title">Edit Product Form</h4>
+                                                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                                                                     <span aria-hidden="true">×</span>
                                                                                 </button>
                                                                             </div>
                                                                             <div class="modal-body">
                                                                                 <div class="form-group row">
-                                                                                    <label class="col-3">Sub-Category
-                                                                                        Name</label>
-                                                                                    <input type="text"
-                                                                                        name='subcategoryname'
-                                                                                        class="col-6 form-control"
-                                                                                        value="<%= pro.Subcategory_Name %>"
-                                                                                        required='' />
+                                                                                    <label class="col-3">Product Name</label>
+                                                                                    <input type="text" name='productname' class="col-6 form-control" value="<%= pro.Product_Name %>" required='' />
                                                                                 </div>
                                                                                 <div class="form-group row">
-                                                                                    <label
-                                                                                        class="col-4">Category</label>
-                                                                                    <select name='category' required="">
-                                                                                        <option value="">Select Category
-                                                                                        </option>
-                                                                                        <% for(let cat of categorys){
-                                                                                            if(cat.Category_Id==pro.Category_Id){
-                                                                                            %>
-                                                                                            <option
-                                                                                                value="<%= cat.Category_Id %>"
-                                                                                                selected>
+                                                                                    <label class="col-3">Category</label>
+                                                                                    <select name='category' required="" onchange="getsubcat(this.value)" value="<%= pro.Category_Name %>">
+                                                                                        <option value="">Select Category</option>
+                                                                                        <% for(let cat of categorys){ %>
+                                                                                            <option value="<%= cat.Category_Id %>">
                                                                                                 <%= cat.Category_Name %>
                                                                                             </option>
-                                                                                            <% }else{ %>
-                                                                                                <option
-                                                                                                    value="<%= cat.Category_Id %>">
-                                                                                                    <%= cat.Category_Name
-                                                                                                        %>
-                                                                                                </option>
-                                                                                                <% } } %>
+                                                                                        <% } %>
                                                                                     </select>
                                                                                 </div>
+                                                                                <div class="form-group row">
+                                                                                    <label class="col-3">Sub-Category</label>
+                                                                                    <select name="subcategory" id="subcategory" required="" value="<%= pro.Subcategory_Name %>">
+                                                                                        <option value="">Select Sub-Category</option>
+                                                                                    </select>
+                                                                                </div>
+                                                                                <div class="form-group row">
+                                                                                    <label class="col-3">Description</label>
+                                                                                    <input type="text" name='description' class="col-6 form-control" required='' value="<%= pro.Description %>" />
+                                                                                </div>
+                                                                                <div class="form-group row">
+                                                                                    <label class="col-3">Price</label>
+                                                                                    <input type="number" name='price' class="col-6 form-control" required='' value="<%= pro.Price %>" />
+                                                                                </div>
+                                                                                <div class="form-group row">
+                                                                                    <label class="col-3">Offer</label>
+                                                                                    <input type="number" name='offer' class="col-6 form-control" required='' value="<%= pro.Offer %>" />
+                                                                                </div>
+                                                                                <div class="form-group row">
+                                                                                    <label class="col-3">Quantity</label>
+                                                                                    <input type="text" name='quantity' class="col-6 form-control" required='' value="<%= pro.Quantity %>" />
+                                                                                </div>
                                                                             </div>
-                                                                            <div
-                                                                                class="modal-footer justify-content-between">
-                                                                                <button type="button"
-                                                                                    class="btn btn-default"
-                                                                                    data-dismiss="modal">Close</button>
-                                                                                <input type="submit"
-                                                                                    class="btn btn-primary"
-                                                                                    value='Edit' />
+                                                                            <div class="modal-footer justify-content-between">
+                                                                                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                                                                                <input type="submit" class="btn btn-primary" value='Save' />
                                                                             </div>
                                                                         </form>
                                                                     </div>
