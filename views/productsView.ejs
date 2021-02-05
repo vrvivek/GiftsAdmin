@@ -139,23 +139,6 @@
                                                                                     <input type="text" name='productname' class="col-6 form-control" value="<%= pro.Product_Name %>" required='' />
                                                                                 </div>
                                                                                 <div class="form-group row">
-                                                                                    <label class="col-3">Category</label>
-                                                                                    <select name='category' required="" onchange="getsubcat(this.value)" value="<%= pro.Category_Name %>">
-                                                                                        <option value="">Select Category</option>
-                                                                                        <% for(let cat of categorys){ %>
-                                                                                            <option value="<%= cat.Category_Id %>">
-                                                                                                <%= cat.Category_Name %>
-                                                                                            </option>
-                                                                                        <% } %>
-                                                                                    </select>
-                                                                                </div>
-                                                                                <div class="form-group row">
-                                                                                    <label class="col-3">Sub-Category</label>
-                                                                                    <select name="subcategory" id="subcategory" required="" value="<%= pro.Subcategory_Name %>">
-                                                                                        <option value="">Select Sub-Category</option>
-                                                                                    </select>
-                                                                                </div>
-                                                                                <div class="form-group row">
                                                                                     <label class="col-3">Description</label>
                                                                                     <input type="text" name='description' class="col-6 form-control" required='' value="<%= pro.Description %>" />
                                                                                 </div>
