@@ -74,9 +74,9 @@ router.post('/products/add', (req,res,next)=>{
 });
 
 router.post('/products/edit/:id',(req,res,next)=>{
-    if(req.body.productname != null && req.body.description && req.body.price){
-        sql="update `products` set Product_Name=?,Description=?,=? where Product_Id=?;";
-        let query = conn.query(sql, [req.body.subcategoryname,req.body.category,req.body.price,req.params.id],(err, results) => {
+    if(req.body.productname != null && req.body.description != null && req.body.price != null && req.body.offer != null){
+        sql="update `products` set Product_Name=?,Description=?,Price=?,Offer=?,Total_Price=?,Quantity=? where Product_Id=?;";
+        let query = conn.query(sql, [req.body.productname,req.body.description,req.body.price,req.body.offer,(req.body.price-req.body.offer),req.body.quantity,req.params.id],(err, results) => {
             if (err) throw err;
             //console.log(JSON.stringify(results));
             res.redirect('/admin/products/index');
